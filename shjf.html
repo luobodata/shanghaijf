@@ -1,0 +1,433 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>地图显示</title>
+    <script type="text/javascript"
+        src=https://webapi.amap.com/maps?v=1.4.15&key=e42628cec1e478cc831ff404b6a9f2ff"></script>
+    <style type="text/css">
+        html,
+        body,
+        #container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .iw_poi_title {
+            color: #CC5522;
+            font-size: 14px;
+            font-weight: bold;
+            overflow: hidden;
+            padding-right: 13px;
+            white-space: nowrap
+        }
+
+        .iw_poi_content {
+            font: 12px arial, sans-serif;
+            overflow: visible;
+            padding-top: 4px;
+            white-space: -moz-pre-wrap;
+            word-wrap: break-word
+        }
+    </style>
+</head>
+
+<body>
+
+    <body>
+        <!--百度地图容器-->
+        <div style="	width: 100%;
+            min-height: 100%;
+            overflow: visible;
+            margin: 0;
+            position: absolute;
+            z-index: 0;" id="container"></div>
+
+        <div class="main;" style="position: relative;
+            left: 24px;
+            top: 24px;
+            width: 220px;
+            background: #fff;
+            box-shadow: 0 0 8px 0 rgb(0 0 0 / 8%);
+            border-radius: 4px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            line-height: 24px;
+            display: flex;
+            opacity: 0.9;">
+            <select id="points">
+                <option value="0">全部</option>
+                <option value="1">50分以下/不触发积分</option>
+                <option value="2">50-60分</option>
+                <option value="3">60-70分</option>
+                <option value="4">70+</option>
+                <option value="5">未开盘</option>
+            </select>
+        </div>
+    </body>
+
+    <script>
+        function findColor(val) {
+            var colorRed = "#FF0000";
+            var colorBlue = "#0000FF";
+            var colorGreen = "#008000";
+            var colorOrange = "#FFA500";
+            var colorYellow = "#FFFF00";
+
+            var colorArray = [colorBlue, colorYellow, colorOrange, colorRed, colorGreen];
+
+            return colorArray[val - 1];
+        }
+
+        var markerArr = [{
+            'title': '华侨城纯水岸',
+            'content': '华侨城纯水岸',
+            'point': '121.66659399999999|31.226672999999998',
+            'pointType': '4'
+        },
+        {
+            'title': '华发仁恒海上溪云',
+            'content': '华发仁恒海上溪云',
+            'point': '121.546628|31.130421000000002',
+            'pointType': '1'
+        },
+        {
+            'title': '中企海睿滨江',
+            'content': '中企海睿滨江',
+            'point': '121.540485|31.247353000000004',
+            'pointType': '5'
+        },
+        {
+            'title': '融创未来金融城13D-06',
+            'content': '融创未来金融城13D-06',
+            'point': '121.677066|31.209467999999998',
+            'pointType': '1'
+        },
+        {
+            'title': '融创未来金融城13C-01',
+            'content': '融创未来金融城13C-01',
+            'point': '121.677066|31.209467999999998',
+            'pointType': '5'
+        },
+        {
+            'title': '融创未来金融城D-02',
+            'content': '融创未来金融城D-02',
+            'point': '121.677066|31.209467999999998',
+            'pointType': '1'
+        },
+        {
+            'title': '仁恒珊瑚世纪',
+            'content': '仁恒珊瑚世纪',
+            'point': '121.5579|31.12325',
+            'pointType': '1'
+        },
+        {
+            'title': '绿洲康城亲水湾',
+            'content': '绿洲康城亲水湾',
+            'point': '121.585551|31.154829',
+            'pointType': '1'
+        },
+        {
+            'title': '宝华紫薇花园',
+            'content': '宝华紫薇花园',
+            'point': '121.58653899999999|31.327733000000002',
+            'pointType': '1'
+        },
+        {
+            'title': '恒大小区',
+            'content': '恒大小区',
+            'point': '121.50910400000001|31.170354',
+            'pointType': '1'
+        },
+        {
+            'title': '璞玉One',
+            'content': '璞玉One',
+            'point': '121.48993600000001|31.222857',
+            'pointType': '1'
+        },
+        {
+            'title': '新湖明珠城',
+            'content': '新湖明珠城',
+            'point': '121.43385|31.249302',
+            'pointType': '2'
+        },
+        {
+            'title': '苏河望',
+            'content': '苏河望',
+            'point': '121.42531299999999|31.252846',
+            'pointType': '2'
+        },
+        {
+            'title': '招商云玺',
+            'content': '招商云玺',
+            'point': '121.492723|31.265807000000002',
+            'pointType': '1'
+        },
+        {
+            'title': '中皇北岸锦源',
+            'content': '中皇北岸锦源',
+            'point': '121.494681|31.254098',
+            'pointType': '1'
+        },
+        {
+            'title': '新弘弘久北外滩',
+            'content': '新弘弘久北外滩',
+            'point': '121.51305500000001|31.256396000000002',
+            'pointType': '4'
+        },
+        {
+            'title': '中粮瑞虹海景壹号',
+            'content': '中粮瑞虹海景壹号',
+            'point': '121.502324|31.267796999999998',
+            'pointType': '5'
+        },
+        {
+            'title': '上海院子',
+            'content': '上海院子',
+            'point': '121.510597|31.321788',
+            'pointType': '5'
+        },
+        {
+            'title': '仁恒海上源',
+            'content': '仁恒海上源',
+            'point': '121.523705|31.270599',
+            'pointType': '5'
+        },
+        {
+            'title': '融创杨浦滨江壹号',
+            'content': '融创杨浦滨江壹号',
+            'point': '121.55022199999999|31.281325',
+            'pointType': '1'
+        },
+        {
+            'title': '龙光天境',
+            'content': '龙光天境',
+            'point': '121.551627|31.280059',
+            'pointType': '5'
+        },
+        {
+            'title': '首创天阅滨江',
+            'content': '首创天阅滨江',
+            'point': '121.518988|31.256311',
+            'pointType': '5'
+        },
+        {
+            'title': '上海星河湾花园三期',
+            'content': '上海星河湾花园三期',
+            'point': '121.406679|31.089975',
+            'pointType': '1'
+        },
+        {
+            'title': '华发四季半岛',
+            'content': '华发四季半岛',
+            'point': '121.40143799999998|31.058821000000002',
+            'pointType': '2'
+        },
+        {
+            'title': '颛桥宝华紫薇花园',
+            'content': '颛桥宝华紫薇花园',
+            'point': '121.399794|31.067607000000002',
+            'pointType': '2'
+        },
+        {
+            'title': '大华公园荟',
+            'content': '大华公园荟',
+            'point': '121.439205|31.382685',
+            'pointType': '5'
+        },
+        {
+            'title': '四季都会绿龙北',
+            'content': '四季都会绿龙北',
+            'point': '121.429076|31.391742999999998',
+            'pointType': '4'
+        },
+        {
+            'title': ' ',
+            'content': ' ',
+            'point': '121.403842|31.300773',
+            'pointType': '5'
+        },
+        {
+            'title': '奥园金地格林云尚',
+            'content': '奥园金地格林云尚',
+            'point': '121.16559299999999|31.320171000000002',
+            'pointType': '5'
+        },
+        {
+            'title': '融信海纳印象',
+            'content': '融信海纳印象',
+            'point': '121.309389|31.301716',
+            'pointType': '3'
+        },
+        {
+            'title': '金地嘉悦湾',
+            'content': '金地嘉悦湾',
+            'point': '121.28651200000002|31.372985999999997',
+            'pointType': '2'
+        },
+        {
+            'title': '金地峯范',
+            'content': '金地峯范',
+            'point': '121.22850700000001|31.392958',
+            'pointType': '2'
+        },
+        {
+            'title': '春申阳光',
+            'content': '春申阳光',
+            'point': '121.19467900000001|31.466168',
+            'pointType': '1'
+        },
+        {
+            'title': '禹州天境铂悦',
+            'content': '禹州天境铂悦',
+            'point': '121.505424|30.978973',
+            'pointType': '5'
+        },
+        {
+            'title': '中海戈雅园',
+            'content': '中海戈雅园',
+            'point': '121.666789|30.915387',
+            'pointType': '5'
+        },
+        {
+            'title': '正阳柏谭湾',
+            'content': '正阳柏谭湾',
+            'point': '121.072965|30.976482',
+            'pointType': '5'
+        },
+        {
+            'title': '中凯曼荼园',
+            'content': '中凯曼荼园',
+            'point': '121.198066|31.086353000000003',
+            'pointType': '5'
+        },
+        {
+            'title': '洋江唐顿公馆',
+            'content': '洋江唐顿公馆',
+            'point': '121.32083600000001|31.129779',
+            'pointType': '1'
+        },
+        {
+            'title': '同济晶萃',
+            'content': '同济晶萃',
+            'point': '121.245632|31.118882',
+            'pointType': '2'
+        },
+        {
+            'title': '佘山玺越',
+            'content': '佘山玺越',
+            'point': '121.19151399999998|31.065732',
+            'pointType': '1'
+        },
+        {
+            'title': '金地丰盛道',
+            'content': '金地丰盛道',
+            'point': '121.254865|31.061677000000003',
+            'pointType': '1'
+        },
+        {
+            'title': '中海阅麓山',
+            'content': '中海阅麓山',
+            'point': '121.13405800000001|31.029049',
+            'pointType': '5'
+        },
+        {
+            'title': '复地湖畔和光',
+            'content': '复地湖畔和光',
+            'point': '121.30838600000001|30.830359',
+            'pointType': '5'
+        },
+        {
+            'title': '碧桂园凤凰城',
+            'content': '碧桂园凤凰城',
+            'point': '121.35999699999999|30.724621000000003',
+            'pointType': '1'
+        },
+        {
+            'title': '御品园林',
+            'content': '御品园林',
+            'point': '121.26816699999999|31.152699',
+            'pointType': '1'
+        },
+        {
+            'title': '盛青云驰',
+            'content': '盛青云驰',
+            'point': '121.08747199999999|31.133806',
+            'pointType': '2'
+        }]
+
+        var markerObjectArr = [];
+
+        var map = new AMap.Map('container', {
+            resizeEnable: true, //是否监控地图容器尺寸变化
+            zoom: 11, //初始化地图层级
+            center: [121.480237, 31.236305] //初始化地图中心点
+        });
+
+        AMap.plugin([
+            'AMap.ToolBar',
+        ], function () {
+            map.addControl(new AMap.ToolBar({
+                liteStyle: true
+            }));
+        });
+        var infoWindow = new AMap.InfoWindow({ offset: new AMap.Pixel(0, -30) });
+
+        function addMarker() {
+            for (var i = 0; i < markerArr.length; i++) {
+                var json = markerArr[i];
+                var p0 = json.point.split("|")[0];
+                var p1 = json.point.split("|")[1];
+                var tmpMarker = new AMap.CircleMarker({
+                    map: map,
+                    center: [p0, p1],
+                    radius: 10,
+                    fillColor: findColor(json.pointType),
+                    strokeColor: findColor(json.pointType),
+                });
+                tmpMarker.content = json.title;
+                tmpMarker.on('click', markerClick);
+                tmpMarker.emit('click', { target: tmpMarker });
+                markerObjectArr.push(tmpMarker);
+            }
+        }
+
+        function markerClick(e) {
+            infoWindow.setContent(e.target.content);
+            infoWindow.open(map, e.target.getCenter());
+        }
+
+        function closeInfoWindow() {
+            map.clearInfoWindow();
+        }
+
+        addMarker();
+
+        var pointOption = document.getElementById("points");
+        function show() {
+            var markerType = pointOption.options[pointOption.selectedIndex].value;
+            for (var j = 0; j < markerObjectArr.length; j++) {
+                var curMarkerObject = markerObjectArr[j];
+                if (markerArr[j].pointType == markerType || markerType == 0) {
+                    map.add(curMarkerObject);
+                }
+                else {
+                    map.remove(curMarkerObject);
+                }
+            }
+
+            closeInfoWindow();
+        }
+
+        pointOption.onchange = show;
+        closeInfoWindow();
+        show();
+        // map.setFitView();
+    </script>
+</body>
+
+</html>
