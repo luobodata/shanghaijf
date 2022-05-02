@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-    <title>地图显示</title>
+    <title>上海新房认筹积分地图（测试版）</title>
     <script type="text/javascript"
         src=https://webapi.amap.com/maps?v=1.4.15&key=e42628cec1e478cc831ff404b6a9f2ff"></script>
     <style type="text/css">
@@ -70,294 +70,1971 @@
         </div>
     </body>
 
-    <script>
+    <script type="module">
         function findColor(val) {
             var colorRed = "#FF0000";
             var colorBlue = "#0000FF";
             var colorGreen = "#008000";
-            var colorOrange = "#FFA500";
-            var colorYellow = "#FFFF00";
+            var colorPink = "#E839B9";
+            var colorBrown = "#784421";
 
-            var colorArray = [colorBlue, colorYellow, colorOrange, colorRed, colorGreen];
+            var colorArray = [colorBrown, colorBlue, colorPink, colorRed, colorGreen];
 
             return colorArray[val - 1];
         }
 
         var markerArr = [{
-            'title': '华侨城纯水岸',
-            'content': '华侨城纯水岸',
-            'point': '121.66659399999999|31.226672999999998',
-            'pointType': '4'
+            'title': '保利云上澄光',
+            'point': '121.310222,31.268965',
+            'pointType': '3',
+            'score': 66.28,
+            'poolsize': '232',
+            'unitPrice': '56000',
+            'url': ''
         },
         {
-            'title': '华发仁恒海上溪云',
-            'content': '华发仁恒海上溪云',
-            'point': '121.546628|31.130421000000002',
-            'pointType': '1'
+            'title': '中骏璟尚',
+            'point': '121.161699,31.285837',
+            'pointType': '3',
+            'score': 60.5,
+            'poolsize': '184',
+            'unitPrice': '37000',
+            'url': ''
         },
         {
-            'title': '中企海睿滨江',
-            'content': '中企海睿滨江',
-            'point': '121.540485|31.247353000000004',
-            'pointType': '5'
-        },
-        {
-            'title': '融创未来金融城13D-06',
-            'content': '融创未来金融城13D-06',
-            'point': '121.677066|31.209467999999998',
-            'pointType': '1'
-        },
-        {
-            'title': '融创未来金融城13C-01',
-            'content': '融创未来金融城13C-01',
-            'point': '121.677066|31.209467999999998',
-            'pointType': '5'
-        },
-        {
-            'title': '融创未来金融城D-02',
-            'content': '融创未来金融城D-02',
-            'point': '121.677066|31.209467999999998',
-            'pointType': '1'
-        },
-        {
-            'title': '仁恒珊瑚世纪',
-            'content': '仁恒珊瑚世纪',
-            'point': '121.5579|31.12325',
-            'pointType': '1'
-        },
-        {
-            'title': '绿洲康城亲水湾',
-            'content': '绿洲康城亲水湾',
-            'point': '121.585551|31.154829',
-            'pointType': '1'
-        },
-        {
-            'title': '宝华紫薇花园',
-            'content': '宝华紫薇花园',
-            'point': '121.58653899999999|31.327733000000002',
-            'pointType': '1'
-        },
-        {
-            'title': '恒大小区',
-            'content': '恒大小区',
-            'point': '121.50910400000001|31.170354',
-            'pointType': '1'
-        },
-        {
-            'title': '璞玉One',
-            'content': '璞玉One',
-            'point': '121.48993600000001|31.222857',
-            'pointType': '1'
-        },
-        {
-            'title': '新湖明珠城',
-            'content': '新湖明珠城',
-            'point': '121.43385|31.249302',
-            'pointType': '2'
-        },
-        {
-            'title': '苏河望',
-            'content': '苏河望',
-            'point': '121.42531299999999|31.252846',
-            'pointType': '2'
-        },
-        {
-            'title': '招商云玺',
-            'content': '招商云玺',
-            'point': '121.492723|31.265807000000002',
-            'pointType': '1'
-        },
-        {
-            'title': '中皇北岸锦源',
-            'content': '中皇北岸锦源',
-            'point': '121.494681|31.254098',
-            'pointType': '1'
-        },
-        {
-            'title': '新弘弘久北外滩',
-            'content': '新弘弘久北外滩',
-            'point': '121.51305500000001|31.256396000000002',
-            'pointType': '4'
-        },
-        {
-            'title': '中粮瑞虹海景壹号',
-            'content': '中粮瑞虹海景壹号',
-            'point': '121.502324|31.267796999999998',
-            'pointType': '5'
-        },
-        {
-            'title': '上海院子',
-            'content': '上海院子',
-            'point': '121.510597|31.321788',
-            'pointType': '5'
-        },
-        {
-            'title': '仁恒海上源',
-            'content': '仁恒海上源',
-            'point': '121.523705|31.270599',
-            'pointType': '5'
-        },
-        {
-            'title': '融创杨浦滨江壹号',
-            'content': '融创杨浦滨江壹号',
-            'point': '121.55022199999999|31.281325',
-            'pointType': '1'
-        },
-        {
-            'title': '龙光天境',
-            'content': '龙光天境',
-            'point': '121.551627|31.280059',
-            'pointType': '5'
-        },
-        {
-            'title': '首创天阅滨江',
-            'content': '首创天阅滨江',
-            'point': '121.518988|31.256311',
-            'pointType': '5'
-        },
-        {
-            'title': '上海星河湾花园三期',
-            'content': '上海星河湾花园三期',
-            'point': '121.406679|31.089975',
-            'pointType': '1'
-        },
-        {
-            'title': '华发四季半岛',
-            'content': '华发四季半岛',
-            'point': '121.40143799999998|31.058821000000002',
-            'pointType': '2'
-        },
-        {
-            'title': '颛桥宝华紫薇花园',
-            'content': '颛桥宝华紫薇花园',
-            'point': '121.399794|31.067607000000002',
-            'pointType': '2'
-        },
-        {
-            'title': '大华公园荟',
-            'content': '大华公园荟',
-            'point': '121.439205|31.382685',
-            'pointType': '5'
-        },
-        {
-            'title': '四季都会绿龙北',
-            'content': '四季都会绿龙北',
-            'point': '121.429076|31.391742999999998',
-            'pointType': '4'
-        },
-        {
-            'title': ' ',
-            'content': ' ',
-            'point': '121.403842|31.300773',
-            'pointType': '5'
-        },
-        {
-            'title': '奥园金地格林云尚',
-            'content': '奥园金地格林云尚',
-            'point': '121.16559299999999|31.320171000000002',
-            'pointType': '5'
+            'title': '南山虹桥领峯',
+            'point': '121.31576,31.267595',
+            'pointType': '2',
+            'score': 58.36,
+            'poolsize': '-1',
+            'unitPrice': '57500',
+            'url': ''
         },
         {
             'title': '融信海纳印象',
-            'content': '融信海纳印象',
-            'point': '121.309389|31.301716',
-            'pointType': '3'
-        },
-        {
-            'title': '金地嘉悦湾',
-            'content': '金地嘉悦湾',
-            'point': '121.28651200000002|31.372985999999997',
-            'pointType': '2'
+            'point': '121.307735,31.301541',
+            'pointType': '2',
+            'score': 52.09,
+            'poolsize': '340',
+            'unitPrice': '59000',
+            'url': ''
         },
         {
             'title': '金地峯范',
-            'content': '金地峯范',
-            'point': '121.22850700000001|31.392958',
-            'pointType': '2'
+            'point': '121.228507,31.392958',
+            'pointType': '2',
+            'score': 51.9,
+            'poolsize': '326',
+            'unitPrice': '46500',
+            'url': ''
         },
         {
-            'title': '春申阳光',
-            'content': '春申阳光',
-            'point': '121.19467900000001|31.466168',
-            'pointType': '1'
+            'title': '万科西郊都会',
+            'point': '121.195717,31.272131',
+            'pointType': '1',
+            'score': 47.0,
+            'poolsize': '363',
+            'unitPrice': '39800',
+            'url': ''
         },
         {
-            'title': '禹州天境铂悦',
-            'content': '禹州天境铂悦',
-            'point': '121.505424|30.978973',
-            'pointType': '5'
+            'title': '金地峯范',
+            'point': '121.229007,31.393458',
+            'pointType': '1',
+            'score': 43.4,
+            'poolsize': '503',
+            'unitPrice': '46500',
+            'url': ''
+        },
+        {
+            'title': '融信海纳印象',
+            'point': '121.308235,31.302041',
+            'pointType': '1',
+            'score': 40.9,
+            'poolsize': '360',
+            'unitPrice': '59000',
+            'url': ''
+        },
+        {
+            'title': '金地嘉悦湾',
+            'point': '121.286512,31.372986',
+            'pointType': '1',
+            'score': 30.5,
+            'poolsize': '336',
+            'unitPrice': '43706',
+            'url': ''
+        },
+        {
+            'title': '路劲悦茂府',
+            'point': '121.229953,31.375481',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '304',
+            'unitPrice': '44500',
+            'url': ''
+        },
+        {
+            'title': '万科·莱茵半岛',
+            'point': '121.181645,31.267858',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '242',
+            'unitPrice': '42000',
+            'url': ''
+        },
+        {
+            'title': '云湖漫城',
+            'point': '121.292315,31.306511',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '377',
+            'unitPrice': '57800',
+            'url': ''
+        },
+        {
+            'title': '嘉宝梦之春',
+            'point': '121.260132,31.377081',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '367',
+            'unitPrice': '48100',
+            'url': ''
+        },
+        {
+            'title': '金海壹品',
+            'point': '121.497138,30.916609',
+            'pointType': '4',
+            'score': 72.8,
+            'poolsize': '363',
+            'unitPrice': '40000',
+            'url': ''
+        },
+        {
+            'title': '保利明玥霞光',
+            'point': '121.5014,30.920373',
+            'pointType': '4',
+            'score': 71.1,
+            'poolsize': '275',
+            'unitPrice': '40000',
+            'url': ''
+        },
+        {
+            'title': '保利明玥湖光',
+            'point': '121.502207,30.923297',
+            'pointType': '3',
+            'score': 68.5,
+            'poolsize': '474',
+            'unitPrice': '40000',
+            'url': ''
+        },
+        {
+            'title': '阳光城未来悦',
+            'point': '121.436379,30.95948',
+            'pointType': '2',
+            'score': 57.2,
+            'poolsize': '262',
+            'unitPrice': '35800',
+            'url': ''
+        },
+        {
+            'title': '阳光城未来悦',
+            'point': '121.436879,30.959979999999998',
+            'pointType': '2',
+            'score': 50.0,
+            'poolsize': '337',
+            'unitPrice': '35800',
+            'url': ''
+        },
+        {
+            'title': '银河丽湾',
+            'point': '121.493352,30.917069',
+            'pointType': '1',
+            'score': 44.84,
+            'poolsize': '49',
+            'unitPrice': '37100',
+            'url': ''
+        },
+        {
+            'title': '国欣颐养·中澳城',
+            'point': '121.475393,30.924004',
+            'pointType': '1',
+            'score': 41.8,
+            'poolsize': '273',
+            'unitPrice': '39600',
+            'url': ''
+        },
+        {
+            'title': '山金中澳城',
+            'point': '121.475393,30.924004',
+            'pointType': '1',
+            'score': 41.48,
+            'poolsize': '273',
+            'unitPrice': '39500',
+            'url': ''
+        },
+        {
+            'title': '融信·海月四季',
+            'point': '121.51607,30.92473',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '316',
+            'unitPrice': '38330',
+            'url': ''
+        },
+        {
+            'title': '融信·海月四季',
+            'point': '121.51657,30.92523',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '161',
+            'unitPrice': '43500',
+            'url': ''
+        },
+        {
+            'title': '阳光城未来悦',
+            'point': '121.436879,30.959979999999998',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '357',
+            'unitPrice': '35800',
+            'url': ''
+        },
+        {
+            'title': '龙湖春江天玺',
+            'point': '121.512227,30.971507',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '288',
+            'unitPrice': '45500',
+            'url': ''
+        },
+        {
+            'title': '南桥金茂悦',
+            'point': '121.503122,30.961665',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '245',
+            'unitPrice': '43300',
+            'url': ''
+        },
+        {
+            'title': '光明九胤',
+            'point': '121.488437,30.95789',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '64',
+            'unitPrice': '36900',
+            'url': ''
+        },
+        {
+            'title': '阳光城青溪水岸',
+            'point': '121.589205,30.928827',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '210',
+            'unitPrice': '29000',
+            'url': ''
+        },
+        {
+            'title': '奉发宝龙广场',
+            'point': '121.732595,30.933689',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '367',
+            'unitPrice': '24900',
+            'url': ''
+        },
+        {
+            'title': '奉发宝龙广场',
+            'point': '121.733095,30.934189',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '422',
+            'unitPrice': '25900',
+            'url': ''
+        },
+        {
+            'title': '宝业青春里',
+            'point': '121.59908,30.929949',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '210',
+            'unitPrice': '29200',
+            'url': ''
+        },
+        {
+            'title': '大家·美颂',
+            'point': '121.662706,30.909721',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '401',
+            'unitPrice': '27000',
+            'url': ''
+        },
+        {
+            'title': '大家·美颂',
+            'point': '121.663206,30.910221',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '369',
+            'unitPrice': '26800',
+            'url': ''
+        },
+        {
+            'title': '光语著',
+            'point': '121.505708,30.898392',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '192',
+            'unitPrice': '32800',
+            'url': ''
+        },
+        {
+            'title': '绿地铂晶舍',
+            'point': '121.466851,30.872995',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '124',
+            'unitPrice': '42300',
+            'url': ''
+        },
+        {
+            'title': '正阳·铂璟湾',
+            'point': '121.475091,30.908286',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '527',
+            'unitPrice': '39000',
+            'url': ''
+        },
+        {
+            'title': '正阳·铂璟湾',
+            'point': '121.47559100000001,30.908786',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '80',
+            'unitPrice': '48800',
+            'url': ''
         },
         {
             'title': '中海戈雅园',
-            'content': '中海戈雅园',
-            'point': '121.666789|30.915387',
-            'pointType': '5'
+            'point': '121.666789,30.915387',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '324',
+            'unitPrice': '27500',
+            'url': ''
         },
         {
-            'title': '正阳柏谭湾',
-            'content': '正阳柏谭湾',
-            'point': '121.072965|30.976482',
-            'pointType': '5'
+            'title': '天和尚上海',
+            'point': '121.556464,30.975607',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '100',
+            'unitPrice': '49000',
+            'url': ''
         },
         {
-            'title': '中凯曼荼园',
-            'content': '中凯曼荼园',
-            'point': '121.198066|31.086353000000003',
-            'pointType': '5'
+            'title': '禹洲雍锦府',
+            'point': '121.508504,30.977665',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '303',
+            'unitPrice': '31900',
+            'url': ''
         },
         {
-            'title': '洋江唐顿公馆',
-            'content': '洋江唐顿公馆',
-            'point': '121.32083600000001|31.129779',
-            'pointType': '1'
+            'title': '大家·美颂',
+            'point': '121.663206,30.910221',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '258',
+            'unitPrice': '34100',
+            'url': ''
         },
         {
-            'title': '同济晶萃',
-            'content': '同济晶萃',
-            'point': '121.245632|31.118882',
-            'pointType': '2'
+            'title': '禹洲天境·铂悦',
+            'point': '121.505424,30.978973',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '289',
+            'unitPrice': '34100',
+            'url': ''
         },
         {
-            'title': '佘山玺越',
-            'content': '佘山玺越',
-            'point': '121.19151399999998|31.065732',
-            'pointType': '1'
+            'title': '禹洲天境·璞悦',
+            'point': '121.508504,30.977665',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '64',
+            'unitPrice': '33800',
+            'url': ''
+        },
+        {
+            'title': '禹洲天境·雍锦府',
+            'point': '121.508504,30.977665',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '302',
+            'unitPrice': '31900',
+            'url': ''
+        },
+        {
+            'title': '大华公园荟',
+            'point': '121.439205,31.382685',
+            'pointType': '4',
+            'score': 75.72,
+            'poolsize': '93',
+            'unitPrice': '53800',
+            'url': ''
+        },
+        {
+            'title': '大华朗香公园里',
+            'point': '121.405326,31.31953',
+            'pointType': '4',
+            'score': 70.45,
+            'poolsize': '232',
+            'unitPrice': '57000',
+            'url': ''
+        },
+        {
+            'title': '大华朗香花园',
+            'point': '121.379086,31.320813',
+            'pointType': '4',
+            'score': 70.01,
+            'poolsize': '106',
+            'unitPrice': '57600',
+            'url': ''
+        },
+        {
+            'title': '四季都会绿龙北',
+            'point': '121.429076,31.391743',
+            'pointType': '3',
+            'score': 66.8,
+            'poolsize': '344',
+            'unitPrice': '47600',
+            'url': ''
+        },
+        {
+            'title': '大华朗香公园里',
+            'point': '121.405826,31.32003',
+            'pointType': '3',
+            'score': 64.3,
+            'poolsize': '544',
+            'unitPrice': '57000',
+            'url': ''
+        },
+        {
+            'title': '大华锦绣悦府',
+            'point': '121.37588,31.353963',
+            'pointType': '3',
+            'score': 63.6,
+            'poolsize': '118',
+            'unitPrice': '49300',
+            'url': ''
+        },
+        {
+            'title': '大华公园城市',
+            'point': '121.426467,31.325313',
+            'pointType': '3',
+            'score': 61.87,
+            'poolsize': '672',
+            'unitPrice': '59600',
+            'url': ''
+        },
+        {
+            'title': '四季都会绿龙北',
+            'point': '121.429576,31.392243',
+            'pointType': '3',
+            'score': 61.7,
+            'poolsize': '352',
+            'unitPrice': '47200',
+            'url': ''
+        },
+        {
+            'title': '大华悦庭',
+            'point': '121.403842,31.300773',
+            'pointType': '3',
+            'score': 60.01,
+            'poolsize': '126',
+            'unitPrice': '57600',
+            'url': ''
+        },
+        {
+            'title': '大华公园荟',
+            'point': '121.439205,31.382885',
+            'pointType': '2',
+            'score': 55.6,
+            'poolsize': '316',
+            'unitPrice': '46500',
+            'url': ''
+        },
+        {
+            'title': '中企光华雅境',
+            'point': '121.350255,31.355289',
+            'pointType': '2',
+            'score': 55.2,
+            'poolsize': '324',
+            'unitPrice': '47500',
+            'url': ''
+        },
+        {
+            'title': '央玺',
+            'point': '121.421746,31.344002',
+            'pointType': '1',
+            'score': 49.2,
+            'poolsize': '288',
+            'unitPrice': '71000',
+            'url': ''
+        },
+        {
+            'title': '上实海上菁英',
+            'point': '121.348797,31.354111',
+            'pointType': '1',
+            'score': 41.8,
+            'poolsize': '552',
+            'unitPrice': '47500',
+            'url': ''
+        },
+        {
+            'title': '建发云锦湾',
+            'point': '121.343594,31.393956',
+            'pointType': '1',
+            'score': 38.58,
+            'poolsize': '368',
+            'unitPrice': '47900',
+            'url': ''
+        },
+        {
+            'title': '大华锦绣四季',
+            'point': '121.400086,31.358421',
+            'pointType': '1',
+            'score': 37.3,
+            'poolsize': '322',
+            'unitPrice': '53800',
+            'url': ''
+        },
+        {
+            'title': '大华锦绣四季',
+            'point': '121.400586,31.358921',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '436',
+            'unitPrice': '47065',
+            'url': ''
+        },
+        {
+            'title': '建发云锦湾',
+            'point': '121.344094,31.394455999999998',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '566',
+            'unitPrice': '46200',
+            'url': ''
+        },
+        {
+            'title': '四季都会月城西',
+            'point': '121.435153,31.375057',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '382',
+            'unitPrice': '46800',
+            'url': ''
+        },
+        {
+            'title': '华润卓越·玲珑悦府',
+            'point': '121.374458,31.410109',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '391',
+            'unitPrice': '41800',
+            'url': ''
+        },
+        {
+            'title': '红星宝山天铂',
+            'point': '121.334116,31.442648',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '384',
+            'unitPrice': '37600',
+            'url': ''
+        },
+        {
+            'title': '大华悦庭',
+            'point': '121.404342,31.301273',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '499',
+            'unitPrice': '57600',
+            'url': ''
+        },
+        {
+            'title': '经纬学府阳光',
+            'point': '121.399132,31.330457',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '369',
+            'unitPrice': '57200',
+            'url': ''
+        },
+        {
+            'title': '上城院子',
+            'point': '121.396206,31.365508',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '514',
+            'unitPrice': '54400',
+            'url': ''
+        },
+        {
+            'title': '万业·紫辰苑',
+            'point': '121.43643,31.398537',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '172',
+            'unitPrice': '46000',
+            'url': ''
+        },
+        {
+            'title': '云锦东方',
+            'point': '121.45428,31.164536',
+            'pointType': '4',
+            'score': 89.52,
+            'poolsize': '95',
+            'unitPrice': '150800',
+            'url': ''
+        },
+        {
+            'title': '鑫耀中城',
+            'point': '121.41516,31.169933',
+            'pointType': '3',
+            'score': 69.21,
+            'poolsize': '328',
+            'unitPrice': '104500',
+            'url': ''
+        },
+        {
+            'title': '宝能公馆1288',
+            'point': '121.454647,31.15013',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '201',
+            'unitPrice': '125000',
+            'url': ''
+        },
+        {
+            'title': '尚海湾豪庭',
+            'point': '121.45902,31.178734',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '305',
+            'unitPrice': '125000',
+            'url': ''
+        },
+        {
+            'title': '新湖明珠城',
+            'point': '121.428088,31.241602',
+            'pointType': '2',
+            'score': 58.51,
+            'poolsize': '173',
+            'unitPrice': '105200',
+            'url': ''
+        },
+        {
+            'title': '苏河望',
+            'point': '121.425313,31.252846',
+            'pointType': '2',
+            'score': 51.35,
+            'poolsize': '96',
+            'unitPrice': '101600',
+            'url': ''
+        },
+        {
+            'title': '新湖明珠城',
+            'point': '121.428088,31.241802',
+            'pointType': '2',
+            'score': 50.0,
+            'poolsize': '173',
+            'unitPrice': '105200',
+            'url': ''
+        },
+        {
+            'title': '沁和园',
+            'point': '121.383729,31.226664',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '51',
+            'unitPrice': '106800',
+            'url': ''
+        },
+        {
+            'title': '苏河望',
+            'point': '121.425313,31.253046',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '323',
+            'unitPrice': '101600',
+            'url': ''
+        },
+        {
+            'title': '首创天阅滨江',
+            'point': '121.518988,31.256311',
+            'pointType': '4',
+            'score': 90.78,
+            'poolsize': '10',
+            'unitPrice': '109900',
+            'url': ''
+        },
+        {
+            'title': '仁恒海上源',
+            'point': '121.523705,31.270599',
+            'pointType': '4',
+            'score': 73.44,
+            'poolsize': '226',
+            'unitPrice': '115000',
+            'url': ''
+        },
+        {
+            'title': '龙光天境',
+            'point': '121.551627,31.280059',
+            'pointType': '4',
+            'score': 70.72,
+            'poolsize': '311',
+            'unitPrice': '99000',
+            'url': ''
+        },
+        {
+            'title': '保利天汇',
+            'point': '121.510427,31.267522',
+            'pointType': '3',
+            'score': 68.88,
+            'poolsize': '308',
+            'unitPrice': '109900',
+            'url': ''
+        },
+        {
+            'title': '中企云萃江湾',
+            'point': '121.515974,31.325434',
+            'pointType': '3',
+            'score': 63.9,
+            'poolsize': '334',
+            'unitPrice': '97000',
+            'url': ''
+        },
+        {
+            'title': '仁恒海上源',
+            'point': '121.52420500000001,31.271099',
+            'pointType': '2',
+            'score': 50.65,
+            'poolsize': '299',
+            'unitPrice': '115000',
+            'url': ''
+        },
+        {
+            'title': '东外滩爱国里',
+            'point': '121.551312,31.276341',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '119',
+            'unitPrice': '97400',
+            'url': ''
+        },
+        {
+            'title': '上海院子',
+            'point': '121.510597,31.321788',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '209',
+            'unitPrice': '132500',
+            'url': ''
+        },
+        {
+            'title': '上海院子',
+            'point': '121.511097,31.322288',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '138',
+            'unitPrice': '133100',
+            'url': ''
+        },
+        {
+            'title': '杨浦滨江壹号',
+            'point': '121.549469,31.28165',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '297',
+            'unitPrice': '99000',
+            'url': ''
+        },
+        {
+            'title': '荣景苑',
+            'point': '121.225308,31.004858',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '82',
+            'unitPrice': '60000',
+            'url': ''
+        },
+        {
+            'title': '荣景苑',
+            'point': '121.225808,31.005357999999998',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '75',
+            'unitPrice': '40800',
+            'url': ''
+        },
+        {
+            'title': '泗水和鸣三期',
+            'point': '121.261793,31.124811',
+            'pointType': '3',
+            'score': 68.0,
+            'poolsize': '128',
+            'unitPrice': '46237',
+            'url': ''
+        },
+        {
+            'title': '同济晶萃二期',
+            'point': '121.245632,31.118882',
+            'pointType': '2',
+            'score': 58.0,
+            'poolsize': '400',
+            'unitPrice': '48000',
+            'url': ''
+        },
+        {
+            'title': '金地西郊风华',
+            'point': '121.25388,31.111455',
+            'pointType': '1',
+            'score': 47.84,
+            'poolsize': '72',
+            'unitPrice': '60000',
+            'url': ''
+        },
+        {
+            'title': '尚云里',
+            'point': '121.297069,31.084758',
+            'pointType': '1',
+            'score': 43.5,
+            'poolsize': '269',
+            'unitPrice': '46300',
+            'url': ''
+        },
+        {
+            'title': '国贸·佘山原墅',
+            'point': '121.175914,31.085558',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '306',
+            'unitPrice': '51759',
+            'url': ''
+        },
+        {
+            'title': '国贸·佘山原墅',
+            'point': '121.17641400000001,31.086057999999998',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '122',
+            'unitPrice': '49300',
+            'url': ''
+        },
+        {
+            'title': '国贸·凤凰原',
+            'point': '121.189705,31.003139',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '79',
+            'unitPrice': '44407',
+            'url': ''
+        },
+        {
+            'title': '景瑞·江山悦',
+            'point': '121.253537,31.037729',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '280',
+            'unitPrice': '47100',
+            'url': ''
+        },
+        {
+            'title': '尚云里',
+            'point': '121.297569,31.085258',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '330',
+            'unitPrice': '48500',
+            'url': ''
+        },
+        {
+            'title': '象屿上海年华',
+            'point': '121.34156,31.072881',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '80',
+            'unitPrice': '43500',
+            'url': ''
+        },
+        {
+            'title': '国贸梧桐原',
+            'point': '121.202903,31.126281',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '468',
+            'unitPrice': '44000',
+            'url': ''
+        },
+        {
+            'title': '大名城映云间',
+            'point': '121.188512,31.00767',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '374',
+            'unitPrice': '44000',
+            'url': ''
+        },
+        {
+            'title': '大名城映云间',
+            'point': '121.189012,31.00817',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '224',
+            'unitPrice': '49000',
+            'url': ''
+        },
+        {
+            'title': '合景天悦赋',
+            'point': '121.226163,31.059555',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '340',
+            'unitPrice': '60000',
+            'url': ''
+        },
+        {
+            'title': '华发象屿光星华府',
+            'point': '121.242539,31.050372',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '219',
+            'unitPrice': '55000',
+            'url': ''
+        },
+        {
+            'title': '华亭首府',
+            'point': '121.185474,31.030146',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '210',
+            'unitPrice': '46000',
+            'url': ''
+        },
+        {
+            'title': '华亭首府',
+            'point': '121.185974,31.030645999999997',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '28',
+            'unitPrice': '59800',
+            'url': ''
         },
         {
             'title': '金地丰盛道',
-            'content': '金地丰盛道',
-            'point': '121.254865|31.061677000000003',
-            'pointType': '1'
+            'point': '121.254865,31.061677',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '414',
+            'unitPrice': '53800',
+            'url': ''
+        },
+        {
+            'title': '金地丰盛道',
+            'point': '121.255365,31.062177',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '284',
+            'unitPrice': '52400',
+            'url': ''
+        },
+        {
+            'title': '佘山玺樾',
+            'point': '121.191514,31.065732',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '221',
+            'unitPrice': '55700',
+            'url': ''
+        },
+        {
+            'title': '松岳名都',
+            'point': '121.234783,31.014707',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '193',
+            'unitPrice': '47100',
+            'url': ''
+        },
+        {
+            'title': '洋江唐顿公馆',
+            'point': '121.320284,31.129618',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '216',
+            'unitPrice': '50400',
+            'url': ''
+        },
+        {
+            'title': '招商华发9号公馆',
+            'point': '121.74467,30.962264',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '296',
+            'unitPrice': '46200',
+            'url': ''
         },
         {
             'title': '中海阅麓山',
-            'content': '中海阅麓山',
-            'point': '121.13405800000001|31.029049',
-            'pointType': '5'
+            'point': '121.134058,31.029049',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '98',
+            'unitPrice': '52100',
+            'url': ''
         },
         {
-            'title': '复地湖畔和光',
-            'content': '复地湖畔和光',
-            'point': '121.30838600000001|30.830359',
-            'pointType': '5'
+            'title': '中海阅麓山',
+            'point': '121.134558,31.029549',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '226',
+            'unitPrice': '49100',
+            'url': ''
         },
         {
-            'title': '碧桂园凤凰城',
-            'content': '碧桂园凤凰城',
-            'point': '121.35999699999999|30.724621000000003',
-            'pointType': '1'
+            'title': '中海阅麓山',
+            'point': '121.134558,31.029549',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '354',
+            'unitPrice': '41700',
+            'url': ''
         },
         {
-            'title': '御品园林',
-            'content': '御品园林',
-            'point': '121.26816699999999|31.152699',
-            'pointType': '1'
+            'title': '中凯曼茶园',
+            'point': '121.198066,31.086353',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '32',
+            'unitPrice': '110000',
+            'url': ''
+        },
+        {
+            'title': '九庐',
+            'point': '121.515497,31.242966',
+            'pointType': '4',
+            'score': 98.4,
+            'poolsize': '152',
+            'unitPrice': '135000',
+            'url': ''
+        },
+        {
+            'title': '晶鸿名邸',
+            'point': '121.478781,31.160976',
+            'pointType': '4',
+            'score': 97.23,
+            'poolsize': '202',
+            'unitPrice': '102000',
+            'url': ''
+        },
+        {
+            'title': '碧云尊邸',
+            'point': '121.57916,31.235085',
+            'pointType': '4',
+            'score': 92.24,
+            'poolsize': '173',
+            'unitPrice': '112000',
+            'url': ''
+        },
+        {
+            'title': '东方惠雅',
+            'point': '121.479151,31.159748',
+            'pointType': '4',
+            'score': 87.44,
+            'poolsize': '384',
+            'unitPrice': '-1',
+            'url': ''
+        },
+        {
+            'title': '森兰星河湾',
+            'point': '121.594531,31.290585',
+            'pointType': '4',
+            'score': 82.42,
+            'poolsize': '285',
+            'unitPrice': '79500',
+            'url': ''
+        },
+        {
+            'title': '浦开仁恒·金桥世纪',
+            'point': '121.630683,31.286164',
+            'pointType': '4',
+            'score': 78.06,
+            'poolsize': '383',
+            'unitPrice': '70300',
+            'url': ''
+        },
+        {
+            'title': '浦开仁恒·金桥世纪',
+            'point': '121.63118300000001,31.286664',
+            'pointType': '4',
+            'score': 75.6,
+            'poolsize': '175',
+            'unitPrice': '70277',
+            'url': ''
+        },
+        {
+            'title': '浦发东悦城',
+            'point': '121.584853,31.102805',
+            'pointType': '4',
+            'score': 71.2,
+            'poolsize': '360',
+            'unitPrice': '42000',
+            'url': ''
+        },
+        {
+            'title': '嘉泷汇',
+            'point': '121.589311,31.254641',
+            'pointType': '3',
+            'score': 69.6,
+            'poolsize': '229',
+            'unitPrice': '83000',
+            'url': ''
+        },
+        {
+            'title': '华侨城纯水岸',
+            'point': '121.666594,31.226673',
+            'pointType': '3',
+            'score': 69.11,
+            'poolsize': '788',
+            'unitPrice': '70600',
+            'url': ''
+        },
+        {
+            'title': '陆家嘴锦绣观澜',
+            'point': '121.700013,31.178785',
+            'pointType': '3',
+            'score': 69.02,
+            'poolsize': '192',
+            'unitPrice': '64000',
+            'url': ''
+        },
+        {
+            'title': '浦发仁恒珊瑚世纪',
+            'point': '121.549948,31.115839',
+            'pointType': '3',
+            'score': 67.93,
+            'poolsize': '316',
+            'unitPrice': '67800',
+            'url': ''
+        },
+        {
+            'title': '融创未来金融城（13c-01）',
+            'point': '121.677066,31.209468',
+            'pointType': '3',
+            'score': 61.3,
+            'poolsize': '437',
+            'unitPrice': '68000',
+            'url': ''
+        },
+        {
+            'title': '绿地海富·东上海',
+            'point': '121.57335,31.1246',
+            'pointType': '2',
+            'score': 58.45,
+            'poolsize': '389',
+            'unitPrice': '62000',
+            'url': ''
+        },
+        {
+            'title': '绿地海富·东上海',
+            'point': '121.57385000000001,31.1251',
+            'pointType': '2',
+            'score': 58.32,
+            'poolsize': '257',
+            'unitPrice': '62000',
+            'url': ''
+        },
+        {
+            'title': '融创未来金融城（13b-01）',
+            'point': '121.677066,31.209468',
+            'pointType': '2',
+            'score': 57.44,
+            'poolsize': '466',
+            'unitPrice': '68000',
+            'url': ''
+        },
+        {
+            'title': '君御公馆',
+            'point': '121.777109,31.050952',
+            'pointType': '2',
+            'score': 56.7,
+            'poolsize': '308',
+            'unitPrice': '34000',
+            'url': ''
+        },
+        {
+            'title': '亲水湾朗廷',
+            'point': '121.580477,31.150865',
+            'pointType': '2',
+            'score': 56.36,
+            'poolsize': '131',
+            'unitPrice': '64400',
+            'url': ''
+        },
+        {
+            'title': '融创未来金融城（13a-01）',
+            'point': '121.677066,31.209468',
+            'pointType': '2',
+            'score': 56.28,
+            'poolsize': '302',
+            'unitPrice': '68000',
+            'url': ''
+        },
+        {
+            'title': '壹府澜庭',
+            'point': '121.558059,31.117352',
+            'pointType': '2',
+            'score': 54.52,
+            'poolsize': '431',
+            'unitPrice': '69000',
+            'url': ''
+        },
+        {
+            'title': '融创未来金融城',
+            'point': '121.677066,31.209468',
+            'pointType': '2',
+            'score': 52.99,
+            'poolsize': '272',
+            'unitPrice': '68000',
+            'url': ''
+        },
+        {
+            'title': '浦发仁恒珊瑚世纪',
+            'point': '121.550448,31.116339',
+            'pointType': '2',
+            'score': 50.0,
+            'poolsize': '72',
+            'unitPrice': '80600',
+            'url': ''
+        },
+        {
+            'title': '阳明花园',
+            'point': '121.591748,31.335305',
+            'pointType': '1',
+            'score': 49.09,
+            'poolsize': '336',
+            'unitPrice': '53000',
+            'url': ''
+        },
+        {
+            'title': '仁恒华发·海上溪云',
+            'point': '121.546628,31.130421',
+            'pointType': '1',
+            'score': 44.41,
+            'poolsize': '514',
+            'unitPrice': '67700',
+            'url': ''
+        },
+        {
+            'title': '公元2040',
+            'point': '121.769555,31.105503',
+            'pointType': '1',
+            'score': 43.2,
+            'poolsize': '212',
+            'unitPrice': '45000',
+            'url': ''
+        },
+        {
+            'title': '壹府澜庭',
+            'point': '121.558559,31.117852',
+            'pointType': '1',
+            'score': 41.28,
+            'poolsize': '365',
+            'unitPrice': '69000',
+            'url': ''
+        },
+        {
+            'title': '公元2040',
+            'point': '121.770055,31.106002999999998',
+            'pointType': '1',
+            'score': 40.7,
+            'poolsize': '336',
+            'unitPrice': '45400',
+            'url': ''
+        },
+        {
+            'title': '海玥瑄邸',
+            'point': '121.719325,31.04577',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '321',
+            'unitPrice': '35055',
+            'url': ''
+        },
+        {
+            'title': '海玥瑄邸',
+            'point': '121.719825,31.04627',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '235',
+            'unitPrice': '40100',
+            'url': ''
+        },
+        {
+            'title': '保利云上拾光',
+            'point': '121.707878,31.10551',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '360',
+            'unitPrice': '45000',
+            'url': ''
+        },
+        {
+            'title': '保利云上拾光',
+            'point': '121.708378,31.106009999999998',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '780',
+            'unitPrice': '46300',
+            'url': ''
+        },
+        {
+            'title': '滨江一品苑',
+            'point': '121.517783,31.205369',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '179',
+            'unitPrice': '111900',
+            'url': ''
+        },
+        {
+            'title': '恒大小区',
+            'point': '121.51182,31.170312',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '24',
+            'unitPrice': '68000',
+            'url': ''
+        },
+        {
+            'title': '浦东紫薇花园',
+            'point': '121.586539,31.327733',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '656',
+            'unitPrice': '67600',
+            'url': ''
+        },
+        {
+            'title': '中粮瑞虹海景壹号',
+            'point': '121.502324,31.267797',
+            'pointType': '4',
+            'score': 94.96,
+            'poolsize': '210',
+            'unitPrice': '115000',
+            'url': ''
+        },
+        {
+            'title': '中粮瑞虹海景壹号',
+            'point': '121.502324,31.268297',
+            'pointType': '4',
+            'score': 88.18,
+            'poolsize': '217',
+            'unitPrice': '115000',
+            'url': ''
+        },
+        {
+            'title': '新弘弘久北外滩',
+            'point': '121.503075,31.252926',
+            'pointType': '4',
+            'score': 73.73,
+            'poolsize': '265',
+            'unitPrice': '129800',
+            'url': ''
+        },
+        {
+            'title': '融创青云一号',
+            'point': '121.474812,31.265386',
+            'pointType': '4',
+            'score': 71.99,
+            'poolsize': '269',
+            'unitPrice': '105000',
+            'url': ''
+        },
+        {
+            'title': '新弘弘久北外滩',
+            'point': '121.503075,31.252426',
+            'pointType': '3',
+            'score': 66.5,
+            'poolsize': '167',
+            'unitPrice': '132000',
+            'url': ''
+        },
+        {
+            'title': '招商外滩玺',
+            'point': '121.49511,31.255332',
+            'pointType': '3',
+            'score': 60.21,
+            'poolsize': '309',
+            'unitPrice': '122500',
+            'url': ''
+        },
+        {
+            'title': '招商云玺',
+            'point': '121.492458,31.266555',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '215',
+            'unitPrice': '118000',
+            'url': ''
+        },
+        {
+            'title': '中皇北岸锦源',
+            'point': '121.494681,31.254098',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '344',
+            'unitPrice': '113000',
+            'url': ''
+        },
+        {
+            'title': '愚源名邸',
+            'point': '121.4283,31.215608',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '154',
+            'unitPrice': '125000',
+            'url': ''
+        },
+        {
+            'title': '融信旭辉世纪古美',
+            'point': '121.377745,31.141983',
+            'pointType': '4',
+            'score': 72.04,
+            'poolsize': '364',
+            'unitPrice': '82500',
+            'url': ''
+        },
+        {
+            'title': '新城·千禧公园',
+            'point': '121.508866,31.02441',
+            'pointType': '3',
+            'score': 66.2,
+            'poolsize': '328',
+            'unitPrice': '40400',
+            'url': ''
+        },
+        {
+            'title': '融信旭辉世纪古美',
+            'point': '121.377745,31.142483',
+            'pointType': '3',
+            'score': 63.26,
+            'poolsize': '394',
+            'unitPrice': '82500',
+            'url': ''
+        },
+        {
+            'title': '华发四季半岛',
+            'point': '121.401438,31.058821',
+            'pointType': '3',
+            'score': 62.28,
+            'poolsize': '274',
+            'unitPrice': '64000',
+            'url': ''
+        },
+        {
+            'title': '颛桥紫薇花园',
+            'point': '121.392094,31.066317',
+            'pointType': '2',
+            'score': 57.37,
+            'poolsize': '476',
+            'unitPrice': '67000',
+            'url': ''
+        },
+        {
+            'title': '建发浦上湾',
+            'point': '121.507247,31.0251',
+            'pointType': '2',
+            'score': 56.7,
+            'poolsize': '498',
+            'unitPrice': '40400',
+            'url': ''
+        },
+        {
+            'title': '华发四季半岛',
+            'point': '121.401438,31.059321',
+            'pointType': '2',
+            'score': 53.96,
+            'poolsize': '481',
+            'unitPrice': '64000',
+            'url': ''
+        },
+        {
+            'title': '上海华府天地',
+            'point': '121.365372,31.040206',
+            'pointType': '2',
+            'score': 50.0,
+            'poolsize': '192',
+            'unitPrice': '61000',
+            'url': ''
+        },
+        {
+            'title': '上海星河湾三期',
+            'point': '121.411892,31.087065',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '246',
+            'unitPrice': '78280',
+            'url': ''
+        },
+        {
+            'title': '上海星河湾三期',
+            'point': '121.411892,31.087565',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '292',
+            'unitPrice': '78300',
+            'url': ''
+        },
+        {
+            'title': '宝华源墅',
+            'point': '121.511336,31.117739',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '224',
+            'unitPrice': '85000',
+            'url': ''
+        },
+        {
+            'title': '古北中央公园',
+            'point': '121.407497,31.183309',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '226',
+            'unitPrice': '108800',
+            'url': ''
+        },
+        {
+            'title': '德信交投·隐秀云庐',
+            'point': '121.342772,31.043766',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '251',
+            'unitPrice': '48000',
+            'url': ''
+        },
+        {
+            'title': '德信交投·隐秀云庐',
+            'point': '121.342772,31.044266',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '142',
+            'unitPrice': '50400',
+            'url': ''
+        },
+        {
+            'title': '玖玺四期',
+            'point': '121.345043,31.04456',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '184',
+            'unitPrice': '50300',
+            'url': ''
+        },
+        {
+            'title': '联仲都悦汇',
+            'point': '121.36025,31.033688',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '38',
+            'unitPrice': '69400',
+            'url': ''
+        },
+        {
+            'title': '上海桃花源',
+            'point': '121.493028,31.107217',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '188',
+            'unitPrice': '147000',
+            'url': ''
+        },
+        {
+            'title': '万科天空之城',
+            'point': '121.252357,31.17566',
+            'pointType': '4',
+            'score': 82.88,
+            'poolsize': '152',
+            'unitPrice': '58600',
+            'url': ''
+        },
+        {
+            'title': '上海蟠龙天地',
+            'point': '121.278004,31.188091',
+            'pointType': '4',
+            'score': 81.23,
+            'poolsize': '741',
+            'unitPrice': '61500',
+            'url': ''
+        },
+        {
+            'title': '虹桥悦澜',
+            'point': '121.28379,31.184841',
+            'pointType': '4',
+            'score': 78.36,
+            'poolsize': '161',
+            'unitPrice': '61300',
+            'url': ''
+        },
+        {
+            'title': '万科天空之城',
+            'point': '121.252357,31.17616',
+            'pointType': '4',
+            'score': 76.52,
+            'poolsize': '256',
+            'unitPrice': '58600',
+            'url': ''
+        },
+        {
+            'title': '金地虹悦湾',
+            'point': '121.316583,31.167123',
+            'pointType': '4',
+            'score': 74.08,
+            'poolsize': '64',
+            'unitPrice': '61000',
+            'url': ''
+        },
+        {
+            'title': '金臣颐墅',
+            'point': '121.219196,31.140159',
+            'pointType': '4',
+            'score': 74.0,
+            'poolsize': '124',
+            'unitPrice': '77800',
+            'url': ''
+        },
+        {
+            'title': '远洋虹桥万和源',
+            'point': '121.24977,31.181804',
+            'pointType': '4',
+            'score': 72.1,
+            'poolsize': '279',
+            'unitPrice': '60300',
+            'url': ''
+        },
+        {
+            'title': '远洋虹桥万和源',
+            'point': '121.24977,31.182304',
+            'pointType': '3',
+            'score': 66.0,
+            'poolsize': '320',
+            'unitPrice': '60300',
+            'url': ''
+        },
+        {
+            'title': '招商虹桥公馆',
+            'point': '121.253052,31.181631',
+            'pointType': '3',
+            'score': 65.39,
+            'poolsize': '272',
+            'unitPrice': '60100',
+            'url': ''
+        },
+        {
+            'title': '佳兆业金茂未来城',
+            'point': '121.133077,31.160778',
+            'pointType': '3',
+            'score': 63.6,
+            'poolsize': '358',
+            'unitPrice': '44000',
+            'url': ''
+        },
+        {
+            'title': '招商虹桥公馆',
+            'point': '121.253052,31.182131',
+            'pointType': '3',
+            'score': 62.65,
+            'poolsize': '276',
+            'unitPrice': '60100',
+            'url': ''
+        },
+        {
+            'title': '佳兆业金茂未来城',
+            'point': '121.133077,31.161278',
+            'pointType': '3',
+            'score': 62.3,
+            'poolsize': '294',
+            'unitPrice': '44000',
+            'url': ''
+        },
+        {
+            'title': '金地虹悦湾',
+            'point': '121.316583,31.167623',
+            'pointType': '3',
+            'score': 62.16,
+            'poolsize': '359',
+            'unitPrice': '64900',
+            'url': ''
+        },
+        {
+            'title': '上善水樾',
+            'point': '121.112849,31.162166',
+            'pointType': '2',
+            'score': 59.4,
+            'poolsize': '72',
+            'unitPrice': '49500',
+            'url': ''
         },
         {
             'title': '盛青云驰',
-            'content': '盛青云驰',
-            'point': '121.08747199999999|31.133806',
-            'pointType': '2'
+            'point': '121.087472,31.133806',
+            'pointType': '2',
+            'score': 59.0,
+            'poolsize': '352',
+            'unitPrice': '43900',
+            'url': ''
+        },
+        {
+            'title': '上善水樾',
+            'point': '121.112849,31.162666',
+            'pointType': '2',
+            'score': 57.5,
+            'poolsize': '132',
+            'unitPrice': '41500',
+            'url': ''
+        },
+        {
+            'title': '宝业·活力天地',
+            'point': '121.086299,31.13133',
+            'pointType': '2',
+            'score': 57.4,
+            'poolsize': '187',
+            'unitPrice': '43100',
+            'url': ''
+        },
+        {
+            'title': '中环境秋月',
+            'point': '121.059474,31.128429',
+            'pointType': '2',
+            'score': 50.5,
+            'poolsize': '224',
+            'unitPrice': '41500',
+            'url': ''
+        },
+        {
+            'title': '安澜西郊宽境',
+            'point': '121.294028,31.155064',
+            'pointType': '2',
+            'score': 50.0,
+            'poolsize': '50',
+            'unitPrice': '69300',
+            'url': ''
+        },
+        {
+            'title': '璟云里',
+            'point': '121.025777,31.110254',
+            'pointType': '1',
+            'score': 35.72,
+            'poolsize': '275',
+            'unitPrice': '37700',
+            'url': ''
+        },
+        {
+            'title': '招商虹桥公馆',
+            'point': '121.253052,31.182631',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '335',
+            'unitPrice': '60100',
+            'url': ''
+        },
+        {
+            'title': '中环境秋月',
+            'point': '121.059974,31.128929',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '321',
+            'unitPrice': '39500',
+            'url': ''
+        },
+        {
+            'title': '中环境秋月',
+            'point': '121.059474,31.128929',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '378',
+            'unitPrice': '42000',
+            'url': ''
+        },
+        {
+            'title': '首创·禧悦芳菲',
+            'point': '121.079622,31.131307',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '524',
+            'unitPrice': '45126',
+            'url': ''
+        },
+        {
+            'title': '金地虹悦湾',
+            'point': '121.317083,31.168122999999998',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '320',
+            'unitPrice': '61000',
+            'url': ''
+        },
+        {
+            'title': '璟云里',
+            'point': '121.025777,31.110754',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '176',
+            'unitPrice': '38800',
+            'url': ''
+        },
+        {
+            'title': '大名城映湖',
+            'point': '121.060469,31.127212',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '348',
+            'unitPrice': '39600',
+            'url': ''
+        },
+        {
+            'title': '大名城映湖',
+            'point': '121.060469,31.127712',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '238',
+            'unitPrice': '39600',
+            'url': ''
+        },
+        {
+            'title': '俊灿星城星尚庭',
+            'point': '121.274988,31.166409',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '473',
+            'unitPrice': '62500',
+            'url': ''
+        },
+        {
+            'title': '俊灿星城星愿里',
+            'point': '121.274988,31.166909',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '30',
+            'unitPrice': '62500',
+            'url': ''
+        },
+        {
+            'title': '御品园林',
+            'point': '121.268167,31.152699',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '74',
+            'unitPrice': '80700',
+            'url': ''
+        },
+        {
+            'title': '龙盛福新里',
+            'point': '121.464376,31.242164',
+            'pointType': '4',
+            'score': 82.8,
+            'poolsize': '119',
+            'unitPrice': '132000',
+            'url': ''
+        },
+        {
+            'title': '新湖上海青蓝',
+            'point': '121.4736,31.26283',
+            'pointType': '2',
+            'score': 50.6,
+            'poolsize': '255',
+            'unitPrice': '114800',
+            'url': ''
+        },
+        {
+            'title': '中兴路一号',
+            'point': '121.475257,31.256942',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '300',
+            'unitPrice': '129800',
+            'url': ''
+        },
+        {
+            'title': '铭德传奇·漪景庭',
+            'point': '121.4698,31.250629',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '20',
+            'unitPrice': '129000',
+            'url': ''
+        },
+        {
+            'title': '宝珀公寓',
+            'point': '121.479558,31.255471',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '299',
+            'unitPrice': '112000',
+            'url': ''
+        },
+        {
+            'title': '安康苑',
+            'point': '121.478482,31.249666',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '309',
+            'unitPrice': '128800',
+            'url': ''
+        },
+        {
+            'title': '复兴珑御',
+            'point': '121.484666,31.217711',
+            'pointType': '4',
+            'score': 112.8,
+            'poolsize': '47',
+            'unitPrice': '136000',
+            'url': ''
+        },
+        {
+            'title': '翠湖五集',
+            'point': '121.479755,31.218178',
+            'pointType': '4',
+            'score': 102.24,
+            'poolsize': '106',
+            'unitPrice': '165000',
+            'url': ''
+        },
+        {
+            'title': '绿地海珀外滩',
+            'point': '121.504694,31.21379',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '145',
+            'unitPrice': '142500',
+            'url': ''
+        },
+        {
+            'title': '璞玉ONE',
+            'point': '121.489936,31.222857',
+            'pointType': '1',
+            'score': 0.0,
+            'poolsize': '174',
+            'unitPrice': '130700',
+            'url': ''
         }]
 
         var markerObjectArr = [];
@@ -380,16 +2057,41 @@
         function addMarker() {
             for (var i = 0; i < markerArr.length; i++) {
                 var json = markerArr[i];
-                var p0 = json.point.split("|")[0];
-                var p1 = json.point.split("|")[1];
+                var p0 = json.point.split(",")[0];
+                var p1 = json.point.split(",")[1];
                 var tmpMarker = new AMap.CircleMarker({
                     map: map,
                     center: [p0, p1],
-                    radius: 10,
+                    radius: 6,
                     fillColor: findColor(json.pointType),
                     strokeColor: findColor(json.pointType),
                 });
-                tmpMarker.content = json.title;
+                tmpMarker.content =
+                    `
+                <head>
+                    <h4 style="margin-bottom:0"; width="300px">${json.title}</h4>
+                </head>
+                <table style="height: 126px; width: 300px;">
+                    <tbody>
+                    <tr>
+                        <td style="background-color: #2A799C;"><span style="color: #ffffff;">积分</span></td>
+                        <td style="width: 200px;background-color: #C5DCE7;">${json.score}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #2A799C;"><span style="color: #ffffff;">社保系数</span></td>
+                        <td style="width: 200px;background-color: #C5DCE7;"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #2A799C;"><span style="color: #ffffff;">开盘套数</span></td>
+                        <td style="width: 200px;background-color: #C5DCE7;">${json.poolsize}</td>
+                    </tr>
+                    <tr>
+                        <td style="background-color: #2A799C;"><span style="color: #ffffff;">联系方式</span></td>
+                        <td style="width: 200px;background-color: #C5DCE7;"><a href="https://mp.weixin.qq.com/s/I9BNqhp-siyBPVCvUdkPHw">详情点击</td>
+                    </tr>
+                    </tbody>
+                </table>
+                `
                 tmpMarker.on('click', markerClick);
                 tmpMarker.emit('click', { target: tmpMarker });
                 markerObjectArr.push(tmpMarker);
